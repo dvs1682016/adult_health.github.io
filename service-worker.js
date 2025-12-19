@@ -1,16 +1,11 @@
 const CACHE_NAME = 'senior-fit-v1';
+// 先只快取必要的，確保不會因為缺一個檔就整組壞掉
 const ASSETS_TO_CACHE = [
-  './',
   './index.html',
-  './style.css',
   './app.js',
-  './manifest.json',
-  './icon.png',
-  'https://cdn.tailwindcss.com',
-  'https://unpkg.com/@phosphor-icons/web'
+  './style.css'
 ];
 
-// 安裝 Service Worker 並快取檔案
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -19,7 +14,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// 攔截網路請求，優先使用快取
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
