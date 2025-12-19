@@ -1,59 +1,65 @@
+/* 基礎設定與字體 */
 :root {
-    --primary-color: #65A30D;
-    --bg-color: #F5F5F4;
+    --primary-color: #65A30D; /* 溫和的草綠色 */
+    --bg-color: #F5F5F4;      /* 溫暖的米灰色 (Stone-100) */
     --card-bg: #FFFFFF;
+    --text-main: #1C1917;
 }
 
 body {
     background-color: var(--bg-color);
-    font-family: -apple-system, sans-serif;
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+    -webkit-tap-highlight-color: transparent;
     overscroll-behavior-y: none;
 }
 
-body.large-text-mode { font-size: 1.25rem; }
-body.large-text-mode .text-sm { font-size: 1.1rem; }
+/* 大字模式覆寫 */
+body.large-text-mode {
+    font-size: 1.2rem;
+}
+body.large-text-mode .text-sm { font-size: 1rem; }
+body.large-text-mode .text-xs { font-size: 0.875rem; }
 body.large-text-mode h1 { font-size: 2rem; }
+body.large-text-mode h2 { font-size: 1.5rem; }
+body.large-text-mode button { min-height: 60px; }
+body.large-text-mode input, body.large-text-mode textarea { font-size: 1.1rem; padding: 0.75rem; }
 
+/* 進度環動畫 */
 .progress-ring__circle {
     transition: stroke-dashoffset 0.5s ease-in-out;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
 
-.task-card, .btn-touch { transition: transform 0.2s; }
-.task-card:active, .btn-touch:active { transform: scale(0.97); }
-
+/* 卡片點擊回饋 */
+.task-card, .btn-touch {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.task-card:active, .btn-touch:active {
+    transform: scale(0.98);
+}
 .task-card.completed {
-    background-color: #ECFCCB !important;
+    /* 完成時固定為綠色背景，覆寫難度顏色 */
+    background-color: #ECFCCB !important; 
     border-color: #84CC16 !important;
 }
 
+/* 歷史紀錄進度條動畫 */
 .history-bar {
     width: 0%;
-    transition: width 0.8s ease-out;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-
-/* --- style.css 原有內容保持不變，請接續在下方新增 --- */
-
-/* 新增：慢跑小人動畫關鍵影格 */
-@keyframes jog {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-5px) rotate(5deg); } /* 往上跳並微傾 */
-    75% { transform: translateY(-2px) rotate(-5deg); } /* 落下並反向微傾 */
+/* 隱藏捲軸但可捲動 */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-/* 新增：套用動畫的 class */
-.animate-jog {
-    animation: jog 0.8s infinite ease-in-out; /* 0.8秒循環一次 */
-    display: inline-block;
-}
-
-/* 新增：標題文字樣式 */
-.app-title {
-    font-family: 'GenJyuuGothic', -apple-system, sans-serif; /* 保持系統字體 */
-    letter-spacing: 0.1em;
-    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
 }
