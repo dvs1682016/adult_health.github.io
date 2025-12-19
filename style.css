@@ -35,3 +35,25 @@ body.large-text-mode h1 { font-size: 2rem; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+/* --- style.css 原有內容保持不變，請接續在下方新增 --- */
+
+/* 新增：慢跑小人動畫關鍵影格 */
+@keyframes jog {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(5deg); } /* 往上跳並微傾 */
+    75% { transform: translateY(-2px) rotate(-5deg); } /* 落下並反向微傾 */
+}
+
+/* 新增：套用動畫的 class */
+.animate-jog {
+    animation: jog 0.8s infinite ease-in-out; /* 0.8秒循環一次 */
+    display: inline-block;
+}
+
+/* 新增：標題文字樣式 */
+.app-title {
+    font-family: 'GenJyuuGothic', -apple-system, sans-serif; /* 保持系統字體 */
+    letter-spacing: 0.1em;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+}

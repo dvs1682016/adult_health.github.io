@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>樂齡動一動 | 每日健康日記</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#F5F5F4">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
-    <!-- 外部資源 -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="h-screen flex flex-col overflow-hidden select-none">
+<header class="flex-none bg-stone-100 border-b border-stone-200 z-50 relative pb-2">
+        
+        <div class="bg-lime-100/80 py-3 flex justify-center items-center gap-3 shadow-sm mb-4 border-b border-lime-200">
+             <i class="ph-fill ph-person-simple-run text-4xl text-lime-700 animate-jog"></i>
+             <div class="text-2xl font-black text-lime-800 app-title">長者運動日記</div>
+        </div>
+
+        <div class="relative mb-2 px-4">
+            <div class="flex items-center justify-center gap-6">
+                <button onclick="app.changeDate(-1)" class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm border border-stone-100 text-stone-600 active:scale-90 transition-all">
+                    <i class="ph ph-caret-left text-xl"></i>
+                </button>
+                <div class="text-center flex flex-col items-center min-w-[140px]">
+                    <h1 class="text-xl font-bold text-stone-800" id="currentDate">載入中...</h1>
+                    <button onclick="app.goToToday()" id="btn-back-today" class="hidden text-xs text-lime-600 font-bold bg-lime-50 px-2 py-0.5 rounded-full mt-1">回到今天</button>
+                </div>
+                <button onclick="app.changeDate(1)" class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm border border-stone-100 text-stone-600 active:scale-90 transition-all">
+                    <i class="ph ph-caret-right text-xl"></i>
+                </button>
+            </div>
+            <button id="installBtn" class="hidden absolute right-4 top-1/2 -translate-y-1/2 bg-stone-800 text-white px-3 py-1 rounded-full text-xs shadow-lg">安裝</button>
+        </div>
+        
+        <div class="px-4">
+            <p class="text-stone-500 text-sm text-center mb-2" id="quoteOfTheDay">動一動，健康好輕鬆！</p>
+            <div id="weather-mode-switch" class="bg-white p-1 rounded-xl flex shadow-sm border border-stone-200 mt-2">
+                <button onclick="app.setWeatherMode('general')" id="btn-mode-general" class="flex-1 py-2 rounded-lg text-sm font-bold transition-colors flex justify-center items-center gap-2">一般天氣</button>
+                <button onclick="app.setWeatherMode('rainy')" id="btn-mode-rainy" class="flex-1 py-2 rounded-lg text-sm font-bold transition-colors flex justify-center items-center gap-2">雨天備案</button>
+            </div>
+        </div>
+    </header><body class="h-screen flex flex-col overflow-hidden select-none">
 
     <!-- 頂部資訊區 -->
     <header class="flex-none p-4 pb-2 bg-stone-100 border-b border-stone-200 z-50 relative">
