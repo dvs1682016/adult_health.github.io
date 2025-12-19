@@ -1,66 +1,37 @@
-/* 基礎設定與字體 */
 :root {
-    --primary-color: #65A30D; /* 溫和的草綠色 */
-    --bg-color: #F5F5F4;      /* 溫暖的米灰色 (Stone-100) */
+    --primary-color: #65A30D;
+    --bg-color: #F5F5F4;
     --card-bg: #FFFFFF;
-    --text-main: #1C1917;
 }
 
 body {
     background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
-    -webkit-tap-highlight-color: transparent;
-    overscroll-behavior-y: none; /* 防止下拉重整干擾 PWA 體驗 */
+    font-family: -apple-system, sans-serif;
+    overscroll-behavior-y: none;
 }
 
-/* 大字模式覆寫 */
-body.large-text-mode {
-    font-size: 1.2rem;
-}
-body.large-text-mode .text-sm { font-size: 1rem; }
-body.large-text-mode .text-xs { font-size: 0.875rem; }
+body.large-text-mode { font-size: 1.25rem; }
+body.large-text-mode .text-sm { font-size: 1.1rem; }
 body.large-text-mode h1 { font-size: 2rem; }
-body.large-text-mode h2 { font-size: 1.5rem; }
-body.large-text-mode button { min-height: 60px; }
-body.large-text-mode input, body.large-text-mode textarea { font-size: 1.1rem; padding: 0.75rem; }
 
-/* 進度環動畫 */
 .progress-ring__circle {
     transition: stroke-dashoffset 0.5s ease-in-out;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
 
-/* 卡片點擊回饋 */
-.task-card, .btn-touch {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.task-card:active, .btn-touch:active {
-    transform: scale(0.98);
-}
+.task-card, .btn-touch { transition: transform 0.2s; }
+.task-card:active, .btn-touch:active { transform: scale(0.97); }
+
 .task-card.completed {
-    /* 完成時固定為綠色背景，覆寫難度顏色 */
-    background-color: #ECFCCB !important; 
+    background-color: #ECFCCB !important;
     border-color: #84CC16 !important;
 }
 
-/* 歷史紀錄進度條動畫 */
 .history-bar {
-    width: 0%; /* 初始寬度為 0 */
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); /* 平滑過渡動畫 */
+    width: 0%;
+    transition: width 0.8s ease-out;
 }
 
-/* 隱藏捲軸但可捲動 */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* 底部導覽列安全區 (iPhone home bar) */
-.pb-safe {
-    padding-bottom: env(safe-area-inset-bottom);
-}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
